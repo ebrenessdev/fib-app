@@ -10,3 +10,15 @@ before_install:
 
 script: # run test suite
   - docker run -e CI=true ebreness/training:fib-app npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "fib-app" # same name from elastic beanstalk
+  env: "FibApp-env"
+  bucket_name: "elasticbeanstalk-us-east-1-372373372435" # travis ci will put a zip file here with the app to be deployed
+  bucket_path: "fib-app" # the s3 bucket is reuse in all environments
+  on:
+    branch: master # only deploy if there are changes in master branch
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
