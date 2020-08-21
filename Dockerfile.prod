@@ -1,6 +1,7 @@
 # Phase 1 - Build
 # everything from the build phase will be removed
-FROM node:alpine AS builder
+# FROM node:alpine AS builder
+FROM node:alpine
 
 WORKDIR '/usr/react-app'
 
@@ -18,6 +19,7 @@ RUN npm run build
 FROM nginx
 # travis-ci wil use this instruction to open the port in the elastic beanstalk environment
 EXPOSE 80
-COPY --from=builder /usr/react-app/build /usr/share/nginx/html
+# COPY --from=builder /usr/react-app/build /usr/share/nginx/html
+COPY --from=0 /usr/react-app/build /usr/share/nginx/html
 
 # the default command of nginx command is start nginx, we don't need to specify a default CMD
