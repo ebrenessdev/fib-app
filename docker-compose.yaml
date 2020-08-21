@@ -1,0 +1,22 @@
+version: '3'
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+    - "3000:3000"
+    volumes:
+    - /usr/react-app/node_modules
+    - ./frontend:/usr/react-app
+    stdin_open: true #Recently, a bug was introduced with the latest Create React App version that is causing the React app to exit when starting with Docker Compose.
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+    - /usr/react-app/node_modules
+    - ./frontend:/usr/react-app
+    command: ["npm", "run", "test"]
+    stdin_open: true
