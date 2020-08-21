@@ -15,7 +15,7 @@ deploy:
   provider: elasticbeanstalk
   region: "us-east-1"
   app: "fib-app" # same name from elastic beanstalk
-  env: "fib-app-prod"
+  env: "FibApp-env-1"
   bucket_name: "elasticbeanstalk-us-east-1-372373372435" # travis ci will put a zip file here with the app to be deployed
   bucket_path: "fib-app" # the s3 bucket is reuse in all environments
   on:
