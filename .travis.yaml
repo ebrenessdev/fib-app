@@ -1,0 +1,12 @@
+language: generic
+
+# super user permissions
+sudo: required
+services:
+  - docker # install a copy of docker in our docker container
+
+before_install:
+  - docker build -t ebreness/training:fib-app -f Dockerfile.dev . # build our docker image
+
+script: # run test suite
+  - docker run -e CI=true ebreness/training:fib-app npm run test
